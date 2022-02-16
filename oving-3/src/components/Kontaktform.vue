@@ -20,7 +20,7 @@
             </p>
             
         
-            <button class="button" :class="{ disableButton: !isValid }" :disabled="!isValid" @click="onSubmit" type="submit">Submit</button>
+            <button class="button"  @click="onSubmit" type="submit">Submit</button>
         </form>
     </div>
     
@@ -28,7 +28,6 @@
 </template>
 <script>
 import BaseInput from './BaseInput.vue';
-import axios from 'axios';
 export default {
   components: { BaseInput },
     data() {
@@ -42,15 +41,10 @@ export default {
     },
     methods: {
         onSubmit() {
-            return confirm('Sendt')
+            
             
         }
     },
-    computed: {
-        isValid() {
-            return (this.name && this.email && this.review)
-        }
-    }
     
 }
 </script>
