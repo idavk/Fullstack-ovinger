@@ -2,19 +2,21 @@
     <div class="container">
         <form @submit.prevent="onSubmit">
             <BaseInput
+                class="input"
                 v-bind="$attrs"
                 v-model="event.title"
-                label="Name"
+                label="Name "
                 type="text"
             />
             
             <BaseInput
+                class="input"
                 v-model="event.email"
-                label="Email"
+                label="Email "
                 type="text"
             />
             
-            <p id="review">
+            <p class="textarea">
                 <label for="review">Review:</label>
                 <textarea v-model="review"></textarea>
             </p>
@@ -41,7 +43,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            
+            console.log('Sender')
+            setTimeout(console.log('Sendt'), 10000)
             
         }
     },

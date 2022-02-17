@@ -1,7 +1,8 @@
 <template>
   <div id="nav">
     <router-link to="/">Kalkulator</router-link> |
-    <router-link to="/kontaktskjema">Kontaktskjema</router-link>
+    <router-link to="/kontaktskjema">Kontaktskjema</router-link> |
+    <router-link to="/loginpage">Loginpage</router-link>
   </div>
   <router-view />
 </template>
