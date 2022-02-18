@@ -5,7 +5,7 @@
                 class="input"
                 v-bind="$attrs"
                 v-model="event.title"
-                label="Name "
+                label="Name"
                 type="text"
             />
             
@@ -22,7 +22,7 @@
             </p>
             
         
-            <button class="button"  @click="onSubmit" type="submit">Submit</button>
+            <button class="button" @click="onSubmit" type="submit">Submit</button>
         </form>
     </div>
     
@@ -43,8 +43,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            console.log('Sender')
-            setTimeout(console.log('Sendt'), 10000)
+            if(this.name === "" || this.email === "" || this.review === "")
+            alert("Alle felt må fære fylt ut før man kan sende inn skjemaet")
             
         }
     },
@@ -56,7 +56,7 @@ export default {
         margin-inline-start : 550px;
         border: solid black;
         padding: 4px;
-        background-color: gray;
+        background-color: whitesmoke;
         align-self: auto;
         max-width: 250px;
         min-height: 200px;

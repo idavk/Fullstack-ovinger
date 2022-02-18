@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" @submit.prevent="handleClickSignin">
         <BaseInput
             class="input"
             v-model="event.username"
@@ -14,45 +14,44 @@
             type="text"
         />
 
-        <button class="button" @click="onLogin()">Login</button>
+        <button class="button" @click="handleClickSignin">Login</button>
     </div>
     
 </template>
 <script>
-import axios from 'axios';
 import BaseInput from './BaseInput.vue';
+import axios from 'axios'
 export default {
+    name: 'LoginComponent',
     components: {
         BaseInput
     },
     data() {
-        return {
-            event: {
-                username: '',
-                password: '',
-                loginStatus: ''
-            }
-        } 
+      return {
+        event: { 
+            username: '',
+            password: '',
+            loginStatus: '',
+        }
+      }
     },
     methods: {
-        async onLogin() {
-            const loginRequest = {username: this.username, password: this.password};
-            const loginResponse = await axios.post("http://localhost:8082/loginpage", loginRequest);
-            console.log(loginResponse)
-            alert("Login: " + loginResponse.data.loginStatus)
-        },
-        onLogin_2 () {
-            const loginRequest = { username: this.username, password: this.password };
-            const loginResponse = axios.post("http://localhost:8082/loginpage", loginRequest);
-            console.log(loginResponse)
-            loginResponse.then((resolvedResult) => {
-            this.loginStatus = resolvedResult.data.loginStatus;
-            // alert("Login2: " + resolvedResult.data.loginStatus);
-      });
+      async handleClickSignin (){
+         //alert("You entered, username: " + this.username);
+        const loginRequest = { username:this.event.username, password: this.event.password };
+        const loginResponse = await axios.post("http://localhost:8085/demo/login", loginRequest);
+        console.log(loginResponse);
+        alert("Login: " + loginResponse.data.loginStatus);
+        if(loginResponse.status[0] == 2) {
+            this.$router.push('/homepage');
+        } else {
+            //print("Det ser ikke ut som du er registert!");
+        }
+
+        }
+
     },
 
-
-    } 
+    }
     
-}
 </script>
