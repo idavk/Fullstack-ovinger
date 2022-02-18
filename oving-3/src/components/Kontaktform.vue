@@ -1,10 +1,9 @@
 <template>
     <div class="container">
-        <form @submit.prevent="onSubmit">
+        <form>
             <BaseInput
                 class="input"
-                v-bind="$attrs"
-                v-model="event.title"
+                v-model="event.name"
                 label="Name"
                 type="text"
             />
@@ -22,7 +21,7 @@
             </p>
             
         
-            <button class="button" @click="onSubmit" type="submit">Submit</button>
+            <button class="button" @click="onSubmit()" type="submit">Submit</button>
         </form>
     </div>
     
@@ -43,7 +42,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            if(this.name === "" || this.email === "" || this.review === "")
+            if(this.event.name === '' || this.event.email === '' || this.event.review === '')
             alert("Alle felt må fære fylt ut før man kan sende inn skjemaet")
             
         }

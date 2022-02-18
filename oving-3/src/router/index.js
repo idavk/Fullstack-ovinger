@@ -6,7 +6,7 @@ import HomePage from "../views/HomePage.vue"
 
 const routes = [
   {
-    path: "/",
+    path: "/Kalkulator",
     name: "Kalkulator",
     component: Kalkulator,
   },
@@ -16,6 +16,10 @@ const routes = [
     
     component: () =>
       import("../views/Kontaktskjema.vue"),
+  },
+  {
+    path: "/",
+    redirect: "/loginpage"
   },
   {
     path: "/loginpage",

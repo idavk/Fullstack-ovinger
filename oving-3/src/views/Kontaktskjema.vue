@@ -1,4 +1,6 @@
 <template>
+  <router-link to="/homepage">Homepage</router-link> |
+  <router-link to="/Kalkulator">Kalkulator</router-link>
   <div class="about">
     <kontaktform></kontaktform>
   </div>

@@ -42,10 +42,10 @@ export default {
         const loginResponse = await axios.post("http://localhost:8085/demo/login", loginRequest);
         console.log(loginResponse);
         alert("Login: " + loginResponse.data.loginStatus);
-        if(loginResponse.status[0] == 2) {
+        if(loginResponse.status == 201) {
             this.$router.push('/homepage');
         } else {
-            //print("Det ser ikke ut som du er registert!");
+            alert("Denne brukeren er ikke registrert")
         }
 
         }
