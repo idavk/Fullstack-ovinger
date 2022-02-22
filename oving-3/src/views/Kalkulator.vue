@@ -14,7 +14,7 @@ import KalkulatorDisplay from "@/components/KalkulatorDisplay.vue";
 export default {
   name: "Kalkulator",
   components: {
-    KalkulatorDisplay
+    KalkulatorDisplay,
   },
 };
 </script>

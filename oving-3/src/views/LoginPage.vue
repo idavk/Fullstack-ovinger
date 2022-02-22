@@ -1,12 +1,11 @@
 <template>
-    <LoginInfo/>
-    
+  <LoginInfo />
 </template>
 <script>
-import LoginInfo from '../components/LoginInfo.vue';
+import LoginInfo from "../components/LoginInfo.vue";
 export default {
-    components: {
-        LoginInfo
-    }
-}
+  components: {
+    LoginInfo,
+  },
+};
 </script>

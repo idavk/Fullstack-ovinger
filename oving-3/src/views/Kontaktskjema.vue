@@ -6,10 +6,10 @@
   </div>
 </template>
 <script>
-import Kontaktform from '../components/Kontaktform.vue'
+import Kontaktform from "../components/Kontaktform.vue";
 export default {
   components: {
-    Kontaktform
-  }
-}
+    Kontaktform,
+  },
+};
 </script>

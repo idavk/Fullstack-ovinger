@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/homepage"></router-link> 
-    <router-link to="/Kalkulator"></router-link> 
+    <router-link to="/homepage"></router-link>
+    <router-link to="/Kalkulator"></router-link>
     <router-link to="/kontaktskjema"></router-link>
     <router-link to="/loginpsage"></router-link>
   </div>
@@ -40,7 +40,6 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-
 }
 
 label,

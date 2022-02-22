@@ -1,36 +1,48 @@
 <template>
   <div class="container">
     <div class="kalkulator">
-      <div id="display">{{ current || 0}}</div>
+      <div id="display">{{ current || 0 }}</div>
       <button class="button-operator" @click="clear">C</button>
-      <button class="button-operator" @click="calculate()"> </button>
+      <button class="button-operator" @click="calculate()"></button>
       <button class="button-operator" @click="del">DEL</button>
       <button
-          class="button-operator"
-          @click="setOperator('plus')"
-          v-bind:class="{ active: operator == 'plus'}">
+        class="button-operator"
+        @click="setOperator('plus')"
+        v-bind:class="{ active: operator == 'plus' }"
+      >
         +
       </button>
       <button class="button-nr" @click="append('9')">9</button>
       <button class="button-nr" @click="append('8')">8</button>
       <button class="button-nr" @click="append('7')">7</button>
-      <button class="button-operator" @click="setOperator('minus')"
-              v-bind:class="{ active: operator == 'minus'}">
+      <button
+        class="button-operator"
+        @click="setOperator('minus')"
+        v-bind:class="{ active: operator == 'minus' }"
+      >
         -
       </button>
       <button class="button-nr" @click="append('6')">6</button>
       <button class="button-nr" @click="append('5')">5</button>
       <button class="button-nr" @click="append('4')">4</button>
-      <button class="button-operator" @click="setOperator('multiply')"
-              v-bind:class="{ active: operator == 'multiply'}">
+      <button
+        class="button-operator"
+        @click="setOperator('multiply')"
+        v-bind:class="{ active: operator == 'multiply' }"
+      >
         x
       </button>
       <button class="button-nr" @click="append('3')">3</button>
       <button class="button-nr" @click="append('2')">2</button>
       <button class="button-nr" @click="append('1')">1</button>
-      <button class="button-operator" @click="setOperator('divide')"
-              v-bind:class="{ active: operator == 'divide'}">÷</button>
-      <button class="button-nr"> </button>
+      <button
+        class="button-operator"
+        @click="setOperator('divide')"
+        v-bind:class="{ active: operator == 'divide' }"
+      >
+        ÷
+      </button>
+      <button class="button-nr"></button>
       <button class="button-nr" @click="append('0')">0</button>
       <button class="button-nr" @click="addComma">.</button>
       <button class="button-operator" @click="calculate()">=</button>
@@ -54,25 +66,25 @@ export default {
       current: "",
       operator: null,
       calculations: [],
-      hasComma: false
-    }
+      hasComma: false,
+    };
   },
-  methods:  {
+  methods: {
     clear() {
-      this.current = '';
+      this.current = "";
       this.previous = null;
       this.operator = null;
       this.hasComma = false;
     },
     append(number) {
-      if(this.operatorClicked) {
-        this.current = '';
+      if (this.operatorClicked) {
+        this.current = "";
         this.operatorClicked = false;
       }
       this.current = `${this.current}${number}`;
     },
     addComma() {
-      if(this.hasComma == false) {
+      if (this.hasComma == false) {
         this.current = `${this.current}${"."}`;
         this.hasComma = true;
       }
@@ -88,27 +100,27 @@ export default {
 
       let operatorSign = null;
 
-      if(this.operator != null) {
+      if (this.operator != null) {
         switch (this.operator) {
-          case "plus" :
+          case "plus":
             this.current = a + b;
             operatorSign = "+";
             break;
-          case "minus" :
+          case "minus":
             this.current = a - b;
             operatorSign = "-";
             break;
-          case "multiply" :
+          case "multiply":
             this.current = a * b;
             operatorSign = "x";
             break;
-          case "divide" :
+          case "divide":
             this.current = a / b;
             operatorSign = "÷";
             break;
         }
         this.calculations.push(
-            a + " " + operatorSign + " " + b + " = " + this.current
+          a + " " + operatorSign + " " + b + " = " + this.current
         );
       }
       this.previous = null;
@@ -116,12 +128,12 @@ export default {
     },
     del() {
       this.current = this.current.substring(0, this.current.length - 1);
-      if(this.current.length < 1) {
+      if (this.current.length < 1) {
         this.current = "0";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

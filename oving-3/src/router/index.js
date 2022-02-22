@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Kalkulator from "../views/Kalkulator.vue";
-import LoginPage from "../views/LoginPage.vue"
-import HomePage from "../views/HomePage.vue"
+import LoginPage from "../views/LoginPage.vue";
+import HomePage from "../views/HomePage.vue";
 //import RegisterLogin from '../views/RegisterLogin.vue'
 
 const routes = [
@@ -13,23 +13,22 @@ const routes = [
   {
     path: "/kontaktskjema",
     name: "Kontaktskjema",
-    
-    component: () =>
-      import("../views/Kontaktskjema.vue"),
+
+    component: () => import("../views/Kontaktskjema.vue"),
   },
   {
     path: "/",
-    redirect: "/loginpage"
+    redirect: "/loginpage",
   },
   {
     path: "/loginpage",
     name: "Loginpage",
-    component: LoginPage
+    component: LoginPage,
   },
   {
     path: "/homepage",
     name: "Homepage",
-    component: HomePage
+    component: HomePage,
   },
 ];
 
