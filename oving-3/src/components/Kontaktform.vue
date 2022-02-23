@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form @submit.prevent="onSubmit()">
+    <form @submit.prevent="onSubmit">
       <BaseInput
         class="input"
         v-model="name"
@@ -14,24 +14,35 @@
         v-model="email"
         :error="emailError"
         label="Email "
+        type="email"
+      />
+
+      <BaseInput
+        class="input"
+        v-model="message"
+        :error="messageError"
+        label="Feedback "
         type="text"
       />
 
-      <p class="textarea">
-        <label for="review">Review:</label>
-        <textarea v-model="review"></textarea>
-      </p>
-
-      <button class="button" type="submit">Submit</button>
+      <button class="button" type="submit" @click="onSubmit">Submit</button>
     </form>
   </div>
 </template>
 <script>
 import BaseInput from "./BaseInput.vue";
 import { useField, useForm } from "vee-validate";
+import { useStore } from "vuex";
+import { v4 as uuidv4 } from "uuid";
 export default {
   components: { BaseInput },
+  data() {
+    return {
+      user: ["id", "name", "email", "message"]
+    }
+  },
   setup() {
+    const store = useStore();
     function onSubmit() {
       console.log("Reviewer: ", this.name, this.email);
     }
@@ -55,12 +66,21 @@ export default {
         }
         return true;
       },
+      message: (value) => {
+        if (!value) return "This field is required";
+        if(!String(value).length) return "This field is required"
+      }
     };
     useForm({
       validationSchema: validations,
     });
     const { value: email, errorMessage: emailError, handleChangeEmail, } = useField("email");
     const { value: name, errorMessage: nameError, handleChangeName,} = useField("name");
+    const { value: message, errorMessage: messageError, handleChangeMessage} = useField("message");
+
+    name.value = store.state.name;
+    email.value = store.state.email;
+
     return {
       onSubmit,
       email,
@@ -69,6 +89,9 @@ export default {
       nameError,
       handleChangeEmail,
       handleChangeName,
+      message,
+      handleChangeMessage,
+      messageError
     };
   },
 };
@@ -81,7 +104,7 @@ export default {
   background-color: whitesmoke;
   align-self: auto;
   max-width: 250px;
-  min-height: 200px;
+  min-height: 400px;
   color: black;
 }
 #name {

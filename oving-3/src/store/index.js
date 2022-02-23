@@ -2,14 +2,17 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    name: '',
-    email: '',
-    reviews: []
+    id: null,
+    name: null,
+    email: null,
   },
   mutations: {
-    ADD_REVIE(state, review) {
-      state.reviews.push(review)
-    }
+    ADD_NAME(state, name) {
+      state.name = name;
+    },
+    ADD_EMAIL(state, email) {
+      state.email = email;
+    },
   },
   actions: {},
   modules: {},
