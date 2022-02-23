@@ -158,5 +158,4 @@ input + p.errorMessage {
   box-shadow: none;
 }
 
-
 </style>
