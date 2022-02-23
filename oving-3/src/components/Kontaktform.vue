@@ -14,7 +14,7 @@
         v-model="email"
         :error="emailError"
         label="Email "
-        type="email"
+        type="text"
       />
 
       <BaseInput
@@ -33,7 +33,6 @@
 import BaseInput from "./BaseInput.vue";
 import { useField, useForm } from "vee-validate";
 import { useStore } from "vuex";
-import { v4 as uuidv4 } from "uuid";
 export default {
   components: { BaseInput },
   data() {
@@ -44,7 +43,9 @@ export default {
   setup() {
     const store = useStore();
     function onSubmit() {
-      console.log("Reviewer: ", this.name, this.email);
+      store.commit("ADD_NAME", name)
+      store.commit("ADD_EMAIL", email)
+      console.log("Reviewer: ", store.state);
     }
     let validations = {
       email: (value) => {
@@ -96,30 +97,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.container {
-  margin-inline-start: 550px;
-  border: solid black;
-  padding: 4px;
-  background-color: whitesmoke;
-  align-self: auto;
-  max-width: 250px;
-  min-height: 400px;
-  color: black;
-}
-#name {
-  margin-inline-start: 30px;
-  min-width: 50px;
-  max-width: 5px;
-}
-#epost {
-  margin-inline-start: 30px;
-  min-width: 50px;
-  max-width: 5px;
-}
-#review {
-  max-width: 50px;
-  max-width: 5px;
-  margin-inline-start: 30px;
-}
-</style>
