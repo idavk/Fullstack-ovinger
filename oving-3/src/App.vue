@@ -63,43 +63,76 @@ textarea {
   font-family: "Open sans", sans-serif;
   font-size: 100%;
   line-height: 1.15;
-  margin: 0;
+  margin: 5px;
 }
 button,
 input {
   overflow: visible;
+  margin: 10px;
 }
 button {
   text-transform: none;
 }
 button,
-[type="button"],
-[type="reset"],
 [type="submit"] {
   -webkit-appearance: none;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+}
+h1 {
+  font-size: 50px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 38px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 28px;
+  font-weight: 700;
+}
+h4 {
+  font-size: 21px;
+  font-weight: 700;
+}
+h5 {
+  font-size: 16px;
+  font-weight: 700;
+}
+h6 {
+  font-size: 15px;
+  font-weight: 700;
+}
 label {
   color: rgba(0, 0, 0, 0.5);
   font-weight: 700;
+  margin: 10px;
 }
 input {
   box-sizing: border-box;
   border: solid 1px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  margin: 5px;
 }
 input.error {
   margin-bottom: 2px;
 }
-input + p.errorMessage {
-  margin-bottom: 24px;
-}
+
 
 [type="text"],
 [type="number"],
 [type="password"] {
   height: 52px;
   width: 100%;
-  padding: 0 10px;
+  padding: 10px 10px;
   font-size: 20px;
 }
 [type="text"]:focus,
@@ -126,36 +159,4 @@ input + p.errorMessage {
 .errorMessage {
   color: red;
 }
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 52px;
-  padding: 0 40px;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.2s linear;
-}
-.button:hover {
-  -webkit-transform: scale(1.02);
-  transform: scale(1.02);
-}
-.button:active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  box-shadow: none;
-}
-.button:focus {
-  outline: 0;
-}
-.button:disabled {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  box-shadow: none;
-}
-
 </style>

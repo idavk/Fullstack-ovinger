@@ -8,16 +8,15 @@
       ...$attrs,
       onInput: updateValue,
     }"
-    :id="uuid"
     :value="modelValue"
     :placeholder="label"
     :aria-describedby="error ? `${uuid}-error` : null"
     :aria-invalid="error ? true : false"
     :class="{ error }"
   />
-  <BaseErrorMessage v-if="error" :id="`${uuid}-error`">
+  <div v-if="error">
     {{ error }}
-  </BaseErrorMessage>
+  </div>
 </template>
 
 <script>
@@ -48,3 +47,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+div {
+  padding-left: 5px;
+}
+</style>

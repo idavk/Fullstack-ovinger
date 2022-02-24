@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export function doLogin(loginRequest) {
-  return axios
-    .post(`http://localhost:8085/demo/login`, loginRequest)
-    .then((resonse) => {
-      return resonse.data;
-    });
+export async function doLogin(loginRequest) {
+  let response = await axios.post(
+    `http://localhost:8085/demo/login`,
+    loginRequest
+  );
+  return response;
 }

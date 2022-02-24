@@ -1,5 +1,9 @@
 {
-    "reviews": [
-        
+    "users": [
+        {
+            "name": "Ida",
+            "email": "idavk@gmail.no"
+        }
     ]
+        
 }
