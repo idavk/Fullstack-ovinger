@@ -44,7 +44,7 @@
       id="inpPhone"
       class="input"
       v-bind="$attrs"
-      v-model="event.name"
+      v-model="event.phone"
       label="Phone"
       type="Integer"
     />
@@ -62,7 +62,7 @@ export default {
     return {
       event: {
         id: "",
-        name: "",
+        fullname: "",
         adress: "",
         username: "",
         password: "",
@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.state.id = uuidv4();
+      this.event.id = uuidv4();
       this.$store.commit("set_event", this.event);
 
       console.log("Lagring i state: ", this.$store.state.event);

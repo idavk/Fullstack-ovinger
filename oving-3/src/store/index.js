@@ -9,7 +9,7 @@ export default createStore({
     },
     event: {
       id: null,
-      name: null,
+      fullname: null,
       adress: null,
       username: null,
       email: null,
