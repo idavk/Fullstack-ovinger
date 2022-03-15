@@ -55,6 +55,7 @@
         </li>
       </ul>
     </box>
+    <button @click="getPreviousAnswers()">previous answers</button>
   </div>
 </template>
 
@@ -103,7 +104,7 @@ export default {
         secondNumber: this.current,
       };
       let CalculatorResponse = await axios.post(
-        `http://localhost:8888/calculate`,
+        `http://localhost:8085/calculator/calculate`,
         CalculatorRequest
       );
       console.log(CalculatorResponse.data.calculatorStatus);
@@ -115,6 +116,15 @@ export default {
       if (this.current.length < 1) {
         this.current = "0";
       }
+    },
+    async getPreviousAnswers() {
+      let response = await axios.get(
+        `http://localhost:8085/calculator/calculate`
+      );
+      for (let i = 0; i < response.data.length; i++) {
+        this.calculations.push(response.data.map((x) => x.calculatorStatus)[i]);
+      }
+      console.log(response.data);
     },
   },
 };
