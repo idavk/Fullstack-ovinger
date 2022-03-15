@@ -1,7 +1,7 @@
 <template>
+  <router-link to="/homepage">Homepage</router-link>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <kalkulator-display />
+    <kalkulatorDisplay></kalkulatorDisplay>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import KalkulatorDisplay from "@/components/KalkulatorDisplay.vue";
 
 export default {
-  name: "Home",
+  name: "Kalkulator",
   components: {
     KalkulatorDisplay,
   },
