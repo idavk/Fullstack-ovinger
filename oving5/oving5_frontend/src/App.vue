@@ -2,7 +2,7 @@
   <div id="nav">
     <router-link to="/homepage"></router-link>
     <router-link to="/Kalkulator"></router-link>
-    <router-link to="/loginpsage"></router-link>
+    <router-link to="/loginpage"></router-link>
   </div>
   <router-view />
 </template>
