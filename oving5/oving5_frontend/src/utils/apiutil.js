@@ -1,9 +1,26 @@
 import axios from "axios";
+import https from "https";
 
-export async function doLogin(loginRequest) {
-  let response = await axios.post(
-    `http://localhost:8085/calculator/login`,
-    loginRequest
-  );
-  return response;
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+const config = {
+  httpsAgent: agent,
+  auth: {
+    username: "admin",
+    password: "password",
+  },
+};
+
+export function doLogin(loginRequest) {
+  return axios
+    .post(`https://localhost:8085/calculator/hs-ui/login`, loginRequest, config)
+    .then((loginResponse) => {
+      return loginResponse.data;
+    });
 }
+
+
+
+

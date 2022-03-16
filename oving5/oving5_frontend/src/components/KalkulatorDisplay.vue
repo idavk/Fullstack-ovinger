@@ -104,7 +104,7 @@ export default {
         secondNumber: this.current,
       };
       let CalculatorResponse = await axios.post(
-        `http://localhost:8085/calculator/calculate`,
+        `https://localhost:8085/calculator/calculate`,
         CalculatorRequest
       );
       console.log(CalculatorResponse.data.calculatorStatus);
@@ -119,7 +119,7 @@ export default {
     },
     async getPreviousAnswers() {
       let response = await axios.get(
-        `http://localhost:8085/calculator/calculate`
+        `https://localhost:8085/calculator/calculate`
       );
       for (let i = 0; i < response.data.length; i++) {
         this.calculations.push(response.data.map((x) => x.calculatorStatus)[i]);
