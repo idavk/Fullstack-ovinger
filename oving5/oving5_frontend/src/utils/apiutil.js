@@ -15,9 +15,9 @@ const config = {
 
 export function doLogin(loginRequest) {
   return axios
-    .post(`https://localhost:8085/calculator/hs-ui/login`, loginRequest, config)
-    .then((loginResponse) => {
-      return loginResponse.data;
+    .post(`http://localhost:8085/calculator/login`, loginRequest, config)
+    .then((resonse) => {
+      return resonse.data;
     });
 }
 

@@ -14,29 +14,29 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatorResponse {
     @Column(name = "calculation")
-        private String calculatorStatus;
+    private String calculatorStatus;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private LoginRequest loginRequest;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
 
+    public CalculatorResponse(@JsonProperty("calculatorStatus")  String calculatorStatus) {
+        this.calculatorStatus = calculatorStatus;
+    }
 
-        public CalculatorResponse(@JsonProperty("calculatorStatus")  String calculatorStatus) {
-            this.calculatorStatus = calculatorStatus;
-        }
+    public CalculatorResponse() {
 
-        public CalculatorResponse() {
+    }
 
-        }
-
-        @JsonProperty("calculatorStatus")
-        public String getCalculatorStatus() {
+    @JsonProperty("calculatorStatus")
+    public String getCalculatorStatus() {
             return calculatorStatus;
         }
 
-        @OneToMany(cascade=CascadeType.ALL, mappedBy="calculatorStatus")
-        @JsonIgnoreProperties("calculation")
-        private List<CalculatorResponse> calculatorResponses = new ArrayList<>();
 
 }

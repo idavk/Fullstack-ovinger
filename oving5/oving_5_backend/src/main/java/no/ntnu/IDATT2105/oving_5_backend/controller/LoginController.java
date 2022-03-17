@@ -1,13 +1,22 @@
 package no.ntnu.IDATT2105.oving_5_backend.controller;
 
+import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorRequest;
+import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorResponse;
 import no.ntnu.IDATT2105.oving_5_backend.models.LoginRequest;
 import no.ntnu.IDATT2105.oving_5_backend.models.LoginResponse;
+import no.ntnu.IDATT2105.oving_5_backend.service.LoginService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 @RestController
 @RequestMapping(value = "/login")
@@ -19,13 +28,12 @@ public class LoginController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public LoginResponse doLogin(final @RequestBody LoginRequest loginRequest){
+    public LoginResponse doLogin3(final @RequestBody LoginRequest loginRequest){
         LOGGER.info("Logging in..." + loginRequest.getUsername());
         if(loginRequest.getUsername().equalsIgnoreCase("user")
                 && loginRequest.getPassword().equalsIgnoreCase("pass")) {
             return new LoginResponse("Success");
         }
-
         return new LoginResponse("Fail");
     }
 }

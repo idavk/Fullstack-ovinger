@@ -47,21 +47,23 @@
       <button class="button-nr" @click="addComma">.</button>
       <button class="button-operator" @click="calculate()">=</button>
     </div>
-    <box class="log">
+    <div class="log">
       <h2>Calculations</h2>
       <ul>
         <li v-for="calculation in calculations" v-bind:key="calculation">
           {{ calculation }}
         </li>
       </ul>
-    </box>
+    </div>
     <button @click="getPreviousAnswers()">previous answers</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import https from "https";
 export default {
+  name: "KalkulatorDisplay",
   data() {
     return {
       previous: "",
@@ -98,14 +100,26 @@ export default {
       this.current = "";
     },
     async calculate() {
+      const agent = new https.Agent({
+        rejectUnauthorized: false,
+      });
+  
+      const config = {
+        httpsAgent: agent,
+        auth: {
+          username: "admin",
+          password: "password",
+        },
+      };
+      
       const CalculatorRequest = {
         firstNumber: this.previous,
         operator: this.operator,
         secondNumber: this.current,
       };
       let CalculatorResponse = await axios.post(
-        `https://localhost:8085/calculator/calculate`,
-        CalculatorRequest
+        `http://localhost:8085/calculator/calculate`,
+        CalculatorRequest, config
       );
       console.log(CalculatorResponse.data.calculatorStatus);
       this.calculations.push(CalculatorResponse.data.calculatorStatus);
@@ -119,7 +133,7 @@ export default {
     },
     async getPreviousAnswers() {
       let response = await axios.get(
-        `https://localhost:8085/calculator/calculate`
+        `http://localhost:8085/calculator/calculate`
       );
       for (let i = 0; i < response.data.length; i++) {
         this.calculations.push(response.data.map((x) => x.calculatorStatus)[i]);

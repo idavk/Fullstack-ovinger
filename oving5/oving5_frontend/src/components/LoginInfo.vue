@@ -30,7 +30,7 @@
 import BaseInput from "./BaseInput.vue";
 import { doLogin } from "../utils/apiutil";
 export default {
-  name: "LoginComponent",
+  name: "LoginInfo",
   components: {
     BaseInput,
   },
