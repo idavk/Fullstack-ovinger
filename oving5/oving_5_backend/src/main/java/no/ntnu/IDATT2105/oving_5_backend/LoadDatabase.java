@@ -24,6 +24,7 @@ public class LoadDatabase {
             log.info("Preloading: " + loginRepo.save(new LoginRequest("hei", "hallo")));
             log.info("Preloading: " + loginRepo.save(new LoginRequest("user", "pass")));
 
+
         };
 
     }

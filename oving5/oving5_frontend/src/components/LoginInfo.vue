@@ -47,13 +47,13 @@ export default {
   },
   methods: {
     async handleClickSignin() {
-      //alert("You entered, username: " + this.username);
+      alert("You entered, username: " + this.event.username);
       const loginRequest = {
         username: this.event.username,
         password: this.event.password,
       };
-      const loginResponse = await doLogin(loginRequest);
-      if (loginResponse.data.loginStatus == "Success") {
+      const LoginResponse = await doLogin(loginRequest);
+      if (LoginResponse.loginStatus == "Success") {
         this.$store.commit("set_login_username", loginRequest.username);
         this.$router.push("/homepage");
       } else this.loginFailed = true;

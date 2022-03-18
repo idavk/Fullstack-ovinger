@@ -18,4 +18,5 @@ public class LoginResponse {
     public String getLoginStatus() {
         return loginStatus;
     }
+
 }
