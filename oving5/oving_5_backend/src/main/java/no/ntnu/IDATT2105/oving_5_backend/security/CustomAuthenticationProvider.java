@@ -1,7 +1,5 @@
 package no.ntnu.IDATT2105.oving_5_backend.security;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,9 +11,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-@Component
+import java.util.ArrayList;
+import java.util.List;
 
-public class CustomAuthenticationProvider implements AuthenticationProvider{
+@Component
+public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     public CustomAuthenticationProvider() {
         super();

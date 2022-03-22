@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     async handleClickSignin() {
-      alert("You entered, username: " + this.event.username);
+      //alert("You entered, username: " + this.event.username);
       const loginRequest = {
         username: this.event.username,
         password: this.event.password,

@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -18,16 +20,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationProvider authProvider;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
+    protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors().and()
-                .authorizeRequests().antMatchers("/", "/loginpage", "/homepage", "/Kalkulator").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/calculate").permitAll()
-                .and().authorizeRequests().anyRequest().authenticated()
+                .csrf().disable().cors().and()
+
+                .authorizeRequests()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and().authorizeRequests()
+                .antMatchers("/calculator/login").permitAll();
+
         http
                 .headers().frameOptions().disable();
     }

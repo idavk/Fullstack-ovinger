@@ -1,4 +1,4 @@
-package no.ntnu.IDATT2105.oving_5_backend.models;
+package no.ntnu.IDATT2105.oving_5_backend.models.Calculator;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,7 +17,6 @@ public class CalculatorRequest {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
         this.operator = operator;
-
     }
 
     @JsonProperty("firstNumber")

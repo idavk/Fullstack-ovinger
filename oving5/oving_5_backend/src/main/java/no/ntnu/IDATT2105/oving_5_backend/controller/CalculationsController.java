@@ -1,7 +1,7 @@
 package no.ntnu.IDATT2105.oving_5_backend.controller;
 
-import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorRequest;
-import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorResponse;
+import no.ntnu.IDATT2105.oving_5_backend.models.Calculator.CalculatorRequest;
+import no.ntnu.IDATT2105.oving_5_backend.models.Calculator.CalculatorResponse;
 import no.ntnu.IDATT2105.oving_5_backend.service.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,13 @@ public class CalculationsController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public CalculatorResponse doCalculate(final @RequestBody CalculatorRequest calculatorRequest) {
-        return calculatorService.doCalculation(calculatorRequest);
+    public CalculatorResponse doCalculate(final @RequestBody CalculatorRequest calculatorRequest, HttpSession session) {
+        Long userId = (Long)session.getAttribute("user_id");
+        if(userId == null){
+            return null;
+        }
+
+        return calculatorService.doCalculation(calculatorRequest, userId);
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,9 +38,10 @@ public class CalculationsController {
         return calculatorService.getCalculations();
     }
 
-    @GetMapping("")
+    /**@GetMapping("")
     public ArrayList<CalculatorResponse> returnToJSON() {
-        return calculatorService.returnInJson();
-    }
+        return calculatorService.
+                returnInJson();
+    }*/
 
 }

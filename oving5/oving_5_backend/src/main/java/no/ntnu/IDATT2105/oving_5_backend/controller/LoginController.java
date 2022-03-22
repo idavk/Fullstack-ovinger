@@ -1,20 +1,17 @@
 package no.ntnu.IDATT2105.oving_5_backend.controller;
 
-import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorRequest;
-import no.ntnu.IDATT2105.oving_5_backend.models.CalculatorResponse;
-import no.ntnu.IDATT2105.oving_5_backend.models.LoginRequest;
-import no.ntnu.IDATT2105.oving_5_backend.models.LoginResponse;
+import no.ntnu.IDATT2105.oving_5_backend.models.User.LoginRequest;
+import no.ntnu.IDATT2105.oving_5_backend.models.User.LoginResponse;
 import no.ntnu.IDATT2105.oving_5_backend.service.LoginService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 
 
@@ -24,16 +21,16 @@ import java.util.List;
 @CrossOrigin
 public class LoginController {
 
-    private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
+    @Autowired
+    LoginService loginService;
+
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public LoginResponse doLogin3(final @RequestBody LoginRequest loginRequest){
-        LOGGER.info("Logging in..." + loginRequest.getUsername());
-        if(loginRequest.getUsername().equalsIgnoreCase("user")
-                && loginRequest.getPassword().equalsIgnoreCase("pass")) {
-            return new LoginResponse("Success");
-        }
-        return new LoginResponse("Fail");
+    public LoginResponse login(final @RequestBody LoginRequest loginRequest, HttpSession session, ModelMap modelMap) {
+
+        var x = loginService.login_user(loginRequest,session,modelMap);
+
+        return x;
     }
 }

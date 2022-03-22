@@ -36,7 +36,7 @@ const router = createRouter({
   routes,
 });
 
-/**router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.state.login_username) {
       next({
@@ -48,6 +48,6 @@ const router = createRouter({
   } else {
     next();
   }
-});*/
+});
 
 export default router;
