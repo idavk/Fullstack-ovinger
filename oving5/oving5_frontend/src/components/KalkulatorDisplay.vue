@@ -61,7 +61,7 @@
 
 <script>
 import axios from "axios";
-import https from "https";
+//import https from "https";
 export default {
   name: "KalkulatorDisplay",
   data() {
@@ -100,18 +100,16 @@ export default {
       this.current = "";
     },
     async calculate() {
-      const agent = new https.Agent({
-        rejectUnauthorized: false,
-      });
-  
-      const config = {
-        httpsAgent: agent,
-        auth: {
-          username: "admin",
-          password: "password",
-        },
-      };
-      
+      //const agent = new https.Agent({
+        //rejectUnauthorized: false,
+      //});
+     // const config = {
+        //httpsAgent: agent,
+        //auth: {
+          //username: "admin",
+          //password: "password",
+        //},
+      //};
       const CalculatorRequest = {
         firstNumber: this.previous,
         operator: this.operator,
@@ -119,7 +117,7 @@ export default {
       };
       let CalculatorResponse = await axios.post(
         `http://localhost:8085/calculator/calculate`,
-        CalculatorRequest, config
+        CalculatorRequest
       );
       console.log(CalculatorResponse.data.calculatorStatus);
       this.calculations.push(CalculatorResponse.data.calculatorStatus);

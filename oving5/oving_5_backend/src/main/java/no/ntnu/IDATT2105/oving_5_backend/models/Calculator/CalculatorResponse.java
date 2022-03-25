@@ -24,19 +24,30 @@ public class CalculatorResponse {
     private User user;
 
 
-    public CalculatorResponse(@JsonProperty("calculatorStatus")  String calculatorStatus, User user) {
+    public CalculatorResponse(@JsonProperty("calculatorStatus")  String calculatorStatus) {
         this.calculatorStatus = calculatorStatus;
-        this.user = user;
     }
 
     public CalculatorResponse() {
 
     }
 
+    public CalculatorResponse(String s, User user) {
+        this.calculatorStatus = s;
+        this.user = user;
+    }
+
+
     @JsonProperty("calculatorStatus")
     public String getCalculatorStatus() {
             return calculatorStatus;
         }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -35,7 +35,7 @@ public class CalculatorService {
     }
 
     public CalculatorResponse doCalculation(final @RequestBody CalculatorRequest calculatorRequest, Long userId) {
-        LOGGER.info("Henter tall fra frontend");
+        LOGGER.info("Henter tall fra frontend:");
         float a = Float.parseFloat(calculatorRequest.getFirstNumber());
         float b = Float.parseFloat(calculatorRequest.getSecondNumber());
         String operatorSign = null;
@@ -60,11 +60,12 @@ public class CalculatorService {
                     break;
             }
             this.calculation = a + " " + operatorSign + " " + b + " = " + result;
-            //calculationsRepo.save(new CalculatorResponse(this.calculation));
             var user = loginRepo.findById(userId);
-            if(user.isEmpty())
+            if(user.isEmpty()) {
                 return null;
-            var calcResponse =new CalculatorResponse(this.calculation, user.get());
+            }
+            var calcResponse =new CalculatorResponse(this.calculation);
+            calculationsRepo.save(calcResponse);
             calculations.add(calcResponse);
 
 
