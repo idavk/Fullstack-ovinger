@@ -1,6 +1,5 @@
 <template>
   <div id="nav">
-    <router-link to="/homepage"></router-link>
     <router-link to="/Kalkulator"></router-link>
     <router-link to="/loginpage"></router-link>
   </div>
@@ -14,10 +13,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  margin: 0;
+  margin: 100px;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
+  background-color: blanchedalmond;
 }
 #app {
   box-sizing: border-box;

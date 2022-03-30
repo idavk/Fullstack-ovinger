@@ -7,8 +7,8 @@
       <button class="button-operator" @click="del">DEL</button>
       <button
         class="button-operator"
-        @click="setOperator('plus')"
-        v-bind:class="{ active: operator == 'plus' }"
+        @click="setOperator('+')"
+        v-bind:class="{ active: operator == '+' }"
       >
         +
       </button>
@@ -17,8 +17,8 @@
       <button class="button-nr" @click="append('7')">7</button>
       <button
         class="button-operator"
-        @click="setOperator('minus')"
-        v-bind:class="{ active: operator == 'minus' }"
+        @click="setOperator('-')"
+        v-bind:class="{ active: operator == '-' }"
       >
         -
       </button>
@@ -27,8 +27,8 @@
       <button class="button-nr" @click="append('4')">4</button>
       <button
         class="button-operator"
-        @click="setOperator('multiply')"
-        v-bind:class="{ active: operator == 'multiply' }"
+        @click="setOperator('*')"
+        v-bind:class="{ active: operator == '*' }"
       >
         x
       </button>
@@ -37,25 +37,28 @@
       <button class="button-nr" @click="append('1')">1</button>
       <button
         class="button-operator"
-        @click="setOperator('divide')"
-        v-bind:class="{ active: operator == 'divide' }"
+        @click="setOperator('/')"
+        v-bind:class="{ active: operator == '/' }"
       >
         ÷
       </button>
       <button class="button-nr"></button>
       <button class="button-nr" @click="append('0')">0</button>
       <button class="button-nr" @click="addComma">.</button>
-      <button class="button-operator" @click="calculate()">=</button>
+      <button class="button-operator" @click="getAnswer()">=</button>
     </div>
     <div class="log">
       <h2>Calculations</h2>
       <ul>
-        <li v-for="calculation in calculations" v-bind:key="calculation">
+        <li
+          v-for="calculation in this.$store.getters.GET_CALCULATIONLOG.slice().reverse()"
+          v-bind:key="calculation"
+        >
           {{ calculation }}
         </li>
       </ul>
     </div>
-    <button @click="getPreviousAnswers()">previous answers</button>
+    <button @click="getPreviousCalculations()">previous answers</button>
   </div>
 </template>
 
@@ -71,7 +74,11 @@ export default {
       operator: null,
       calculations: [],
       hasComma: false,
-      calulatorStatus: "",
+      config: {
+        headers: {
+          Authorization: "Bearer " + this.$store.getters.GET_TOKEN,
+        },
+      },
     };
   },
   methods: {
@@ -99,44 +106,51 @@ export default {
       this.previous = this.current;
       this.current = "";
     },
-    async calculate() {
-      //const agent = new https.Agent({
-        //rejectUnauthorized: false,
-      //});
-     // const config = {
-        //httpsAgent: agent,
-        //auth: {
-          //username: "admin",
-          //password: "password",
-        //},
-      //};
-      const CalculatorRequest = {
-        firstNumber: this.previous,
-        operator: this.operator,
-        secondNumber: this.current,
-      };
-      let CalculatorResponse = await axios.post(
-        `http://localhost:8085/calculator/calculate`,
-        CalculatorRequest
-      );
-      console.log(CalculatorResponse.data.calculatorStatus);
-      this.calculations.push(CalculatorResponse.data.calculatorStatus);
-      return CalculatorResponse;
+
+    getPreviousCalculations() {
+      this.fetchedPrevious = true;
+      axios
+        .get("http://localhost:8085/getCalculations", this.config)
+        .then((response) => {
+          if (response.data != this.$store.getters.GET_CALCULATIONLOG) {
+            response.data.forEach((element) => {
+              this.$store.commit("ADD_CALCULATION", element);
+            });
+          }
+        });
+    },
+    async getAnswer() {
+      await axios
+        .post(
+          "http://localhost:8085/user/calculate",
+          {
+            calculation: this.previous + this.operator + this.current,
+          },
+          this.config
+        )
+        .then((response) => {
+          if (response.data.answer == null) {
+            this.current = "error";
+          } else {
+            this.$store.commit(
+              "ADD_CALCULATION",
+              this.previous +
+                " " +
+                this.operator +
+                " " +
+                this.current +
+                " = " +
+                response.data.answer
+            );
+            this.current = response.data.answer;
+          }
+        });
     },
     del() {
       this.current = this.current.substring(0, this.current.length - 1);
       if (this.current.length < 1) {
         this.current = "0";
       }
-    },
-    async getPreviousAnswers() {
-      let response = await axios.get(
-        `http://localhost:8085/calculator/calculate`
-      );
-      for (let i = 0; i < response.data.length; i++) {
-        this.calculations.push(response.data.map((x) => x.calculatorStatus)[i]);
-      }
-      console.log(response.data);
     },
   },
 };
@@ -151,21 +165,31 @@ export default {
   grid-auto-rows: minmax(50px, auto);
 }
 .button-nr {
+  display: flex;
+  justify-content: center;
   margin: 1px;
   background-color: grey;
   border: solid 2px;
   border-radius: 20px;
+  padding-top: 10px;
 }
 .button-operator {
+  display: flex;
+  justify-content: center;
   margin: 1px;
   background-color: orange;
   border: solid 2px;
   border-radius: 20px;
+  padding-top: 10px;
 }
 #display {
   grid-column: 1 / 5;
+  display: flex;
+  justify-content: flex-end;
   border: solid 2px;
   background-color: slategray;
   border-radius: 10px;
+  padding-top: 10px;
+  
 }
 </style>

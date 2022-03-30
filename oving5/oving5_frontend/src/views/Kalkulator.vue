@@ -1,5 +1,4 @@
 <template>
-  <router-link to="/homepage">Homepage</router-link>
   <div class="home">
     <kalkulatorDisplay></kalkulatorDisplay>
   </div>

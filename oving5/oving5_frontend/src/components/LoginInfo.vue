@@ -3,7 +3,7 @@
     <BaseInput
       id="inpUsername"
       class="input"
-      v-model="event.username"
+      v-model="username"
       label="Username"
       type="text"
     />
@@ -11,7 +11,7 @@
     <BaseInput
       id="inpPassword"
       class="input"
-      v-model="event.password"
+      v-model="password"
       label="Password"
       type="password"
     />
@@ -19,11 +19,6 @@
     <button id="btnSubmit" class="button" @click="handleClickSignin">
       Login
     </button>
-    <label id="loginstatusLabel">{{ loginStatus }}</label>
-    <p v-if="loginFailed" id="alertRegister">
-      Uuuups! Login failed.... Click here to sign up:
-      <router-link to="/registrering">Register</router-link>
-    </p>
   </div>
 </template>
 <script>
@@ -36,27 +31,25 @@ export default {
   },
   data() {
     return {
-      event: {
-        username: "",
-        password: "",
-        message: "Looks like you need to be registered!",
-      },
-      loginFailed: false,
-      loginStatus: "",
+      userNotFound: false,
+      register: false,
+      username: "",
+      password: "",
     };
   },
   methods: {
-    async handleClickSignin() {
-      //alert("You entered, username: " + this.event.username);
-      const loginRequest = {
-        username: this.event.username,
-        password: this.event.password,
-      };
-      const LoginResponse = await doLogin(loginRequest);
-      if (LoginResponse.loginStatus == "Success") {
-        this.$store.commit("set_login_username", loginRequest.username);
-        this.$router.push("/homepage");
-      } else this.loginFailed = true;
+     async handleClickSignin() {
+      const loginRequest = { username: this.username, password: this.password };
+      const loginResponse = await doLogin(loginRequest);
+      this.$router.push("/Kalkulator");
+      if (loginResponse == "Wrong password") {
+        alert(loginResponse);
+      } else if (loginResponse == "User not found") {
+        alert(loginResponse)
+      } else {
+        this.$store.commit("SET_TOKEN", loginResponse);
+        this.$store.commit("SET_USERNAME", this.username);
+      }
     },
   },
 };
@@ -80,5 +73,9 @@ export default {
   flex-direction: row;
   align-items: center;
   column-gap: 20px;
+}
+.button {
+  display: flex;
+  justify-content: center;
 }
 </style>

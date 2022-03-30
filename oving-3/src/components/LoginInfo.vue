@@ -7,7 +7,6 @@
       label="Username"
       type="text"
     />
-    <button>hei</button>
     <BaseInput
       id="inpPassword"
       class="input"
