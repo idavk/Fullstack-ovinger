@@ -10,15 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginRequest {
-     private String username;
-     private String password;
+     private final String username;
+     private final String password;
 
      @JsonCreator
      public LoginRequest(@JsonProperty("username") final String username, @JsonProperty("password") final String password) {
           this.username = username;
           this.password = password;
      }
-
 
      @JsonProperty("username")
      public String getUsername() {

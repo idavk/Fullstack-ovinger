@@ -1,45 +1,37 @@
 package no.ntnu.IDATT2105.oving_5_backend.models.User;
 
 
-import no.ntnu.IDATT2105.oving_5_backend.models.Calculator.CalculatorResponse;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
+    @Column(name = "id_user", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int idUser;
 
-    @Column
+    @Column(name = "username")
     private String username;
-    @Column
+
+    @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<CalculatorResponse> calculations;
-
-
-    public Long getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public User(){
 
+    }
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-
-    public User() {
-
+    public void setIdUser(int id) {
+        this.idUser = id;
     }
-
 
     public String getUsername() {
         return username;
@@ -49,11 +41,11 @@ public class User {
         this.username = username;
     }
 
-    public String getPassw() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String passw) {
-        this.password = passw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
